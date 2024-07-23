@@ -9,7 +9,7 @@ const StoreContextProvider = (props) => {
   // state for cart items
   const [cartItems, setCartItems] = useState({});
 
-  const url = "http://localhost:4000";
+  const url = "https://food-delivery-app-tca6.onrender.com";
   const [token, setToken] = useState("");
   // to fetch all the food lists data from database
   const [food_list, setFoodList] = useState([]);
