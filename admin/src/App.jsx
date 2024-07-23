@@ -6,7 +6,7 @@ import List from "./pages/List/List";
 import Orders from "./pages/Order/Orders";
 
 function App() {
-  const url = "http://localhost:4000";
+  const url = "https://food-delivery-app-tca6.onrender.com";
   return (
     <div>
       <Navbar />
