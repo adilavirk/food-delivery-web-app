@@ -5,28 +5,34 @@ import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 
 const VerifyOrder = () => {
-  // to find the url parameter
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const success = searchParams.get("success");
   const orderId = searchParams.get("orderId");
 
-  //   get the backend url from context api
   const { url } = useContext(StoreContext);
   const navigate = useNavigate();
+
   const verifyPayment = async () => {
-    const response = await axios.post(`${url}/api/order/verify`, {
-      success,
-      orderId,
-    });
-    if (response.data.success) {
-      navigate("/myorders");
-    } else {
+    try {
+      const response = await axios.post(`${url}/api/order/verify`, {
+        success,
+        orderId,
+      });
+      if (response?.data?.success) {
+        navigate("/myorders");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error verifying payment:", error);
       navigate("/");
     }
   };
+
   useEffect(() => {
     verifyPayment();
-  }, []);
+  }, []); // Only run on mount
+
   return (
     <div className="verify">
       <div className="spinner"></div>
